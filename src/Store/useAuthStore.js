@@ -31,7 +31,7 @@ export const useAuthStore = create((set, get) => ({
         try {
             const res = await axiosInstance.post('/auth/signup', userData);
             set({ authUser: res.data })
-            console.log('User signed up:', res.data);
+            // console.log('User signed up:', res.data);
             toast.success('Account created successfully');
             get().connectSocket()
 
@@ -61,7 +61,7 @@ export const useAuthStore = create((set, get) => ({
         try {
             const res = await axiosInstance.post('/auth/login', userData);
             set({ authUser: res.data })
-            console.log('User logged in:', res.data);
+            // console.log('User logged in:', res.data);
             toast.success('Logged in successfully');
             get().connectSocket()
 
@@ -77,7 +77,7 @@ export const useAuthStore = create((set, get) => ({
     updateProfilePic: async (data) => {
         set({ isUpdatingProfile: true })
         try {
-            console.log('Updating profile picture:', data);
+            // console.log('Updating profile picture:', data);
             const res = await axiosInstance.put('/auth/update-profile-pic', data);
             set({ authUser: res.data })
             toast.success('Profile picture updated successfully');
