@@ -9,6 +9,7 @@ export const useAuthStore = create((set, get) => ({
     isLoggingIn: false,
     isUpdatingProfile: false,
     isCheckingAuth: true,
+    socket: null,
 
     checkAuth: async () => {
         try {
@@ -62,7 +63,7 @@ export const useAuthStore = create((set, get) => ({
             set({ authUser: res.data })
             console.log('User logged in:', res.data);
             toast.success('Logged in successfully');
-            get.connectSocket()
+            get().connectSocket()
 
         } catch (error) {
             console.error('Error logging in:', error);
@@ -97,6 +98,8 @@ export const useAuthStore = create((set, get) => ({
         set({ socket: socket })
     },
     disconnectSocket: () => {
-        if (get().socket.connected) get().socket.disconnect()
+        const socket = get().socket;
+        if (socket && socket.connected) socket.disconnect();
+
     }
 }))
